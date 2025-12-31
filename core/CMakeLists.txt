@@ -8,6 +8,7 @@ target_include_directories(media_xray_core PUBLIC
 
 target_compile_definitions(media_xray_core PUBLIC
     MEDIAXRAY_VERSION="${PROJECT_VERSION}"
+    MEDIAXRAY_GIT_HASH="${MEDIAXRAY_GIT_HASH}"
 )
 
 if (MSVC)

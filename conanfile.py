@@ -1,4 +1,5 @@
 from conan import ConanFile
+from conan.tools.cmake import CMakeToolchain, CMakeDeps
 
 
 class MediaXrayConan(ConanFile):
@@ -13,8 +14,14 @@ class MediaXrayConan(ConanFile):
         "gtest/1.14.0",
     )
 
-    generators = ("CMakeDeps", "CMakeToolchain")
-
     def layout(self):
         self.folders.build = "build"
         self.folders.generators = "build/generators"
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.cache_variables["CMAKE_EXPORT_COMPILE_COMMANDS"] = "ON"
+        tc.generate()
+
+        deps = CMakeDeps(self)
+        deps.generate()
