@@ -4,7 +4,7 @@ add_executable(test_basic
     test_basic.cpp
 )
 
-target_link_libraries(test_basic PRIVATE media_xray_core)
+target_link_libraries(test_basic PRIVATE media_xray_cli)
 target_link_libraries(test_basic PRIVATE GTest::gtest_main)
 
 add_test(NAME test_basic COMMAND test_basic)
