@@ -12,6 +12,7 @@ class MediaXrayConan(ConanFile):
     requires = (
         "cxxopts/3.2.0",
         "gtest/1.14.0",
+        "spdlog/1.13.0",
     )
 
     def layout(self):

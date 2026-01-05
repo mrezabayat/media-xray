@@ -5,6 +5,8 @@
 #include <vector>
 
 #include "cli.h"
+#include "errors.h"
+#include "log.h"
 #include "version.h"
 
 namespace {
@@ -51,23 +53,34 @@ TEST(VersionString, IncludesVersion) {
 
 TEST(CliHelp, ListsAnalyzeCommand) {
   CliResult result = run_cli_with_output({"media-xray", "--help"});
-  EXPECT_EQ(result.code, 0);
+  EXPECT_EQ(result.code, media_xray::EXIT_OK);
   EXPECT_NE(result.out.find("analyze"), std::string::npos);
 }
 
 TEST(CliVersion, PrintsVersionString) {
   CliResult result = run_cli_with_output({"media-xray", "--version"});
-  EXPECT_EQ(result.code, 0);
+  EXPECT_EQ(result.code, media_xray::EXIT_OK);
   EXPECT_NE(result.out.find(media_xray::version_string()), std::string::npos);
 }
 
 TEST(CliAnalyze, MissingInputIsError) {
   CliResult result = run_cli_with_output({"media-xray", "analyze"});
-  EXPECT_NE(result.code, 0);
+  EXPECT_EQ(result.code, media_xray::EXIT_INVALID_ARGS);
   EXPECT_NE(result.err.find("missing <input>"), std::string::npos);
 }
 
 TEST(CliAnalyze, AcceptsInput) {
   CliResult result = run_cli_with_output({"media-xray", "analyze", "foo"});
-  EXPECT_EQ(result.code, 0);
+  EXPECT_EQ(result.code, media_xray::EXIT_OK);
+}
+
+TEST(Logging, EmitsExpectedLevels) {
+  media_xray::set_log_level(media_xray::LogLevel::DEBUG);
+
+  media_xray::log_debug("debug message");
+  media_xray::log_info("info message");
+  media_xray::log_warn("warn message");
+  media_xray::log_error("error message");
+  media_xray::set_log_level(media_xray::LogLevel::INFO);
+  SUCCEED();
 }
