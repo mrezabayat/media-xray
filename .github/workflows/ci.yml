@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    env:
+      BUILD_TYPE: Release
+      CMAKE_PRESET: conan-release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Conan
+        run: pip install conan
+
+      - name: Detect Conan profile
+        run: conan profile detect --force
+
+      - name: Install dependencies (Conan)
+        run: conan install . --build=missing -s build_type=${{ env.BUILD_TYPE }}
+
+      - name: Configure
+        run: cmake --preset ${{ env.CMAKE_PRESET }}
+
+      - name: Build
+        run: cmake --build --preset ${{ env.CMAKE_PRESET }}
+
+      - name: Test
+        run: ctest --preset ${{ env.CMAKE_PRESET }} --output-on-failure
+
+      - name: Upload media-xray binary
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: media-xray-${{ matrix.os }}
+          path: |
+            build/**/media-xray
+            build/**/media-xray.exe
