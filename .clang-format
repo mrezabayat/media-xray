@@ -1,0 +1,70 @@
+# ================================
+# MediaXray C Style (.clang-format)
+# ================================
+
+BasedOnStyle: LLVM
+
+# ----------------
+# Indentation
+# ----------------
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+
+# ----------------
+# Line length
+# ----------------
+ColumnLimit: 100
+
+# ----------------
+# Braces
+# ----------------
+BreakBeforeBraces: Allman
+
+# ----------------
+# Control statements
+# ----------------
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# ----------------
+# Spacing
+# ----------------
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceAfterCStyleCast: true
+
+# ----------------
+# Pointer style
+# ----------------
+PointerAlignment: Left
+
+# ----------------
+# Alignment
+# ----------------
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+
+# ----------------
+# Includes
+# ----------------
+SortIncludes: true
+
+# ----------------
+# Comments
+# ----------------
+ReflowComments: true
+AlignTrailingComments: true
+
+# ----------------
+# Preprocessor
+# ----------------
+IndentPPDirectives: AfterHash
+
+# ----------------
+# Misc
+# ----------------
+MaxEmptyLinesToKeep: 1
