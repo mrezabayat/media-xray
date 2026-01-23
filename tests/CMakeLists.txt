@@ -1,18 +1,40 @@
-add_executable(test_hls_invariants
-    core/test_hls_invariants.c
+enable_testing()
+
+function(add_c_test TEST_SOURCE LINK_LIBS)
+    get_filename_component(TEST_NAME ${TEST_SOURCE} NAME_WE)
+
+    add_executable(${TEST_NAME} ${TEST_SOURCE})
+
+    target_include_directories(${TEST_NAME}
+        PRIVATE
+            ${CMAKE_SOURCE_DIR}
+            ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+
+    target_link_libraries(${TEST_NAME}
+        PRIVATE
+            ${LINK_LIBS}
+    )
+
+    add_test(
+        NAME ${TEST_NAME}
+        COMMAND ${TEST_NAME}
+    )
+endfunction()
+
+
+file(GLOB_RECURSE CORE_TESTS
+    core/test_*.c
 )
 
-target_include_directories(test_hls_invariants
-    PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_SOURCE_DIR}
+file(GLOB_RECURSE ANALYSIS_TESTS
+    analysis/test_*.c
 )
 
-target_link_libraries(test_hls_invariants
-    mediaxray_core
-)
+foreach(test_file ${CORE_TESTS})
+    add_c_test(${test_file} mediaxray_core)
+endforeach()
 
-add_test(
-    NAME core_hls_invariants
-    COMMAND test_hls_invariants
-)
+foreach(test_file ${ANALYSIS_TESTS})
+    add_c_test(${test_file} mediaxray_analysis)
+endforeach()

@@ -1,2 +1,8 @@
 # build folder
 build*/
+
+# IDE
+.vscode/
+
+# Virtual envs
+.venv*/

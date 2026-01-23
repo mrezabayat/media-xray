@@ -15,6 +15,7 @@ option(BUILD_TESTS "Build unit tests" ON)
 # Subdirectories
 # --------------------
 add_subdirectory(core)
+add_subdirectory(analysis)
 
 if (BUILD_TESTS)
     enable_testing()

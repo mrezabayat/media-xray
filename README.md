@@ -4,7 +4,6 @@ MediaXray is a **production-grade media analysis and parsing tool** built on **F
 
 It is structured using a **Hexagonal (Ports & Adapters) architecture**, ensuring a **clean separation of domain logic, analysis, and infrastructure**, making it **reliable, testable, and maintainable**.
 
----
 
 ## Project Goals
 
@@ -19,7 +18,6 @@ MediaXray is designed to start as a **CLI tool** but can grow into:
 - SaaS applications  
 - Internal infrastructure components  
 
----
 
 ## Directory Structure
 
@@ -36,7 +34,6 @@ mediaxray/
 
 ```
 
----
 
 ## Hexagonal Architecture Overview
 
@@ -91,7 +88,6 @@ Adapters          <- FFmpeg parsing, network, file I/O
 - Formats output and error messages  
 - **Does NOT** contain analysis or parsing logic  
 
----
 
 ## Key Principles
 
@@ -101,7 +97,6 @@ Adapters          <- FFmpeg parsing, network, file I/O
 - **Replaceable infrastructure:** Adapters can be swapped without changing core logic  
 - **Deterministic:** Everything in core and analysis is fully deterministic  
 
----
 
 ## Building the Project
 
@@ -122,7 +117,6 @@ ctest --test-dir . --output-on-failure
 
 Tests are **pure C**, using a minimal assertion framework, ensuring **core correctness without external dependencies**.
 
----
 
 ## Why This Design Matters
 
@@ -132,7 +126,6 @@ Tests are **pure C**, using a minimal assertion framework, ensuring **core corre
 * **Testability:** Domain rules can be tested **in isolation**
 * **Industry best practice:** Mirrors architecture used in mature media libraries
 
----
 
 ## Next Steps / TODO
 
@@ -141,7 +134,6 @@ Tests are **pure C**, using a minimal assertion framework, ensuring **core corre
 * Expand **diagnostics reporting**
 * Build **CLI commands** for exporting analysis results
 
----
 
 > **Principle to remember:**
 > *“Core is boring — and that’s a feature.”*

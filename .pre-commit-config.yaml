@@ -1,0 +1,26 @@
+repos:
+  # ----------------------------
+  # General hygiene
+  # ----------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: mixed-line-ending
+      - id: check-yaml
+
+  # ----------------------------
+  # clang-format (C / headers)
+  # ----------------------------
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v18.1.8
+    hooks:
+      - id: clang-format
+        name: clang-format (C)
+        files: \.(c|h)$
+        args:
+          - -style=file

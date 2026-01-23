@@ -4,7 +4,7 @@ add_library(mediaxray_core STATIC
 
 target_include_directories(mediaxray_core
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}
 )
 
 target_compile_options(mediaxray_core PRIVATE

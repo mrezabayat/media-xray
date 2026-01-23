@@ -68,3 +68,11 @@ IndentPPDirectives: AfterHash
 # Misc
 # ----------------
 MaxEmptyLinesToKeep: 1
+
+# ----------------
+# Function parameters
+# ----------------
+BinPackParameters: false
+BinPackArguments: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
